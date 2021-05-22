@@ -3,17 +3,8 @@ import { useState } from 'react'
 import { StarIcon } from '@heroicons/react/solid'
 import Currency from 'react-currency-formatter'
 
-const Max_rating = 5
-const Min_ratiing = 1
 
-function Product({ id, title, price, description, category, image }) {
-  const [ rating ] = useState(
-    Math.floor(Math.random() * (Max_rating - Min_ratiing + 1)) + Min_ratiing
-  )
-
-  const [hasPrime] = useState(Math.random() < 0.5)
-
-
+function Product({ id, title, price, description, category, image, rating, hasPrime }) {
   return (
     <div className='relative flex flex-col m-5 bg-white z-30 p-10'>
       <p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>
@@ -24,7 +15,7 @@ function Product({ id, title, price, description, category, image }) {
 
       <div className='flex'>
         {
-          Array(rating).fill().map((_, i) => <StarIcon className='h-4 text-yellow-500'/>)
+          Array(rating).fill().map((_, i) => <StarIcon key={Date.now() + i} className='h-4 text-yellow-500'/>)
         }
       </div>
 

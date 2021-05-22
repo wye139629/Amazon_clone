@@ -23,8 +23,16 @@ export default function Home({ products }) {
 }
 
 export async function getServerSideProps(context) {
+  const Max_rating = 5
+  const Min_rating = 1
   const products = await fetch('https://fakestoreapi.com/products')
   .then(res => res.json())
+
+  products.forEach(product => {
+    product.rating =  Math.floor(Math.random() * (Max_rating - Min_rating + 1)) + Min_rating
+    product.hasPrime = Math.random() < 0.5
+  })
+
   return {
     props: {
       products
